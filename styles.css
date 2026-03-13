@@ -80,7 +80,7 @@ ul { list-style: none; }
     min-height: calc(100vh - 80px);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; padding: 20px;
-    background: linear-gradient(rgba(53, 23, 227, 0.5), rgba(0,0,0,0.5)), url(imgs/prgms.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)), url(prgms.jpg);
 }
 
 .hero h1 { font-family: 'Eczar', serif; font-size: 4rem; color: #ffffff; margin-bottom: 10px;}
