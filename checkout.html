@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ForLags | Pagar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">ForLags</a>
+        <ul class="nav-links">
+            <li><a href="catalogo.html">
+
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-magnifying-glass" style="position:absolute; bottom:-5px; right:-5px; font-size:0.6em; background:white; border-radius:50%;"></i>
+                
+                <span>Catálogo</span>
+            </a></li>
+            <li><a href="sobre-nosotros.html"><i class="fa-solid fa-users"></i> <span>Sobre Nosotros</span></a></li>
+            <li><a href="contacto.html"><i class="fa-solid fa-envelope"></i> <span>Contacto</span></a></li>
+            <li><a href="faqs.html"><i class="fa-solid fa-circle-question"></i> <span>FAQs</span></a></li>
+            
+            <!-- Menú de Usuario -->
+            <li class="user-menu-container" onclick="toggleUserMenu()">
+                <div class="user-icon" id="userIconBtn">
+                    <i class="fa-solid fa-user"></i> <span id="userNameDisplay">Iniciar Sesión</span>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="login.html" id="linkLogin">Ingresar / Registro</a>
+                    <a href="perfil.html" id="linkPerfil" style="display:none;">Ver Perfil</a>
+                    <a href="admin.html" id="linkAdmin" style="display:none;">Gestionar</a>
+                    <a href="#" id="linkLogout" style="display:none;" onclick="cerrarSesion()">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CARRITO -->
+    <div class="cart-bubble" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping" id="cartIcon"></i>
+    </div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <i class="fa-solid fa-xmark" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-body">
+            <p>Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <h3>Total: $0</h3>
+            <a href="checkout.html" class="btn-salmon">Pagar ahora</a>
+        </div>
+    </div>
+
+    <main style="padding: 2rem 5%; display: flex; justify-content: center;">
+        <div class="floating-card" style="margin: 0; width: 100%; max-width: 600px;">
+            <h2 style="color: var(--azul-oscuro); text-align: center; margin-bottom: 20px;">Resumen y Envío</h2>
+            
+            <form class="admin-form" onsubmit="simularPago(event)">
+                <h4 style="color: var(--azul-medio); margin-bottom: 10px;">Datos de Envío</h4>
+                <input type="text" id="nombreEnvio" placeholder="Nombre Completo" required>
+                <input type="text" placeholder="Dirección de entrega" required>
+                <input type="text" placeholder="Ciudad" required>
+                <input type="text" placeholder="Teléfono" required>
+                
+                <div style="background: var(--bg-hueso); padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;">
+                    <h3 style="color: var(--salmon);">Total a Pagar: $50.000</h3>
+                    <p style="font-size: 0.8rem; color: #666;">(Simulación MercadoPago)</p>
+                </div>
+
+                <button type="submit" class="btn-salmon" style="width: 100%;">Confirmar y Pagar</button>
+            </form>
+
+            <!-- Mensaje de éxito oculto -->
+            <div id="mensajeExito" style="display: none; text-align: center; margin-top: 20px; padding: 20px; background: #d4edda; border-radius: 10px; color: green;">
+                <h3>¡Pago Exitoso!</h3>
+                <p>Tu guía de envío es: <strong id="numGuia"></strong></p>
+                <a href="index.html" class="btn-azul" style="margin-top: 15px;">Volver al Inicio</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Autorellenar si hay sesión iniciada
+        const user = localStorage.getItem('forlags_user');
+        if(user && user !== 'Administrador') {
+            document.getElementById('nombreEnvio').value = user;
+        }
+
+        function simularPago(e) {
+            e.preventDefault();
+            // Generar guía aleatoria
+            const guia = 'FL-' + Math.floor(Math.random() * 1000000);
+            document.getElementById('numGuia').innerText = guia;
+            document.querySelector('form').style.display = 'none';
+            document.getElementById('mensajeExito').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

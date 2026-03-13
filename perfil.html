@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForLags | Inicio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">ForLags</a>
+        <ul class="nav-links">
+            <li><a href="catalogo.html">
+            
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-magnifying-glass" style="position:absolute; bottom:-5px; right:-5px; font-size:0.6em; background:white; border-radius:50%;"></i>
+          
+                <span>Catálogo</span>
+            </a></li>
+            <li><a href="sobre-nosotros.html"><i class="fa-solid fa-users"></i> <span>Sobre Nosotros</span></a></li>
+            <li><a href="contacto.html"><i class="fa-solid fa-envelope"></i> <span>Contacto</span></a></li>
+            <li><a href="faqs.html"><i class="fa-solid fa-circle-question"></i> <span>FAQs</span></a></li>
+            
+            <!-- Menú de Usuario -->
+            <li class="user-menu-container" onclick="toggleUserMenu()">
+                <div class="user-icon" id="userIconBtn">
+                    <i class="fa-solid fa-user"></i> <span id="userNameDisplay">Iniciar Sesión</span>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="login.html" id="linkLogin">Ingresar / Registro</a>
+                    <a href="perfil.html" id="linkPerfil" style="display:none;">Ver Perfil</a>
+                    <a href="admin.html" id="linkAdmin" style="display:none;">Gestionar</a>
+                    <a href="#" id="linkLogout" style="display:none;" onclick="cerrarSesion()">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CARRITO -->
+    <div class="cart-bubble" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping" id="cartIcon"></i>
+    </div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <i class="fa-solid fa-xmark" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-body">
+            <p>Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <h3>Total: $0</h3>
+            <a href="checkout.html" class="btn-salmon">Pagar ahora</a>
+        </div>
+    </div>
+
+    <main>
+    <div class="floating-card">
+        <h2 style="color: var(--azul-oscuro); text-align: center; margin-bottom: 20px;">Mi Perfil</h2>
+        <form class="admin-form">
+            <label>Nombre Completo</label>
+            <input type="text" id="perfilNombre" value="Cliente Nuevo">
+            <label>Correo Electrónico</label>
+            <input type="email" value="cliente@correo.com" disabled>
+            <label>Dirección Predeterminada</label>
+            <input type="text" placeholder="Ej: Calle 123 #45-67">
+            <button type="button" class="btn-salmon" style="width: 100%;" onclick="alert('Datos actualizados')">Guardar Cambios</button>
+        </form>
+    </div>
+</main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-socials" style="margin-bottom: 1.5rem;">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-links" style="margin-bottom: 1.5rem;">
+            <a href="#">Política de Privacidad</a> | 
+            <a href="#">Política de Reembolso</a> | 
+            <a href="#">Política de Envío</a>
+        </div>
+        <p>&copy; 2026 ForLags. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPTS GLOBALES -->
+    <script>
+        // Carrito
+        function toggleCart() { document.getElementById('cartDrawer').classList.toggle('active'); }
+        
+        // Carrusel
+        function scrollCarousel(direction) {
+            document.getElementById('carousel').scrollBy({ left: 300 * direction, behavior: 'smooth' });
+        }
+
+        // Menú Usuario
+        function toggleUserMenu() { document.getElementById('userDropdown').classList.toggle('active'); }
+
+        // Lógica de Sesión
+        const usuarioActual = localStorage.getItem('forlags_user');
+        const rolActual = localStorage.getItem('forlags_role');
+
+        if (usuarioActual) {
+            document.getElementById('userIconBtn').classList.add('logged-in');
+            // Mostrar solo el primer nombre
+            document.getElementById('userNameDisplay').innerText = usuarioActual.split(' ')[0];
+            document.getElementById('linkLogin').style.display = 'none';
+            document.getElementById('linkLogout').style.display = 'block';
+
+            if (rolActual === 'admin') {
+                document.getElementById('linkAdmin').style.display = 'block';
+            } else {
+                document.getElementById('linkPerfil').style.display = 'block';
+            }
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem('forlags_user');
+            localStorage.removeItem('forlags_role');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

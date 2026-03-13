@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ForLags | Iniciar Sesión</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">ForLags</a>
+    </nav>
+
+    <main style="display: flex; justify-content: center; align-items: center; min-height: 80vh;">
+        <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center;">
+            <h2 style="color: var(--azul-oscuro); margin-bottom: 20px;">Iniciar Sesión</h2>
+            
+            <button class="btn-azul" style="width: 100%; margin-bottom: 20px; background: #DB4437;">
+                <i class="fa-brands fa-google"></i> Continuar con Google
+            </button>
+            
+            <p style="margin-bottom: 20px; color: #888;">o usa tu correo</p>
+
+            <form id="loginForm" class="admin-form" onsubmit="procesarLogin(event)">
+                <input type="email" id="email" placeholder="Correo electrónico" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <button type="submit" class="btn-salmon" style="width: 100%;">Ingresar</button>
+            </form>
+             <p style="margin: 20px; color: #888; size: 10;">No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+        </div>
+    </main>
+
+    <script>
+        function procesarLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+
+            if(email === 'admin@forlags.com' && pass === 'Falso9') {
+                localStorage.setItem('forlags_user', 'Administrador');
+                localStorage.setItem('forlags_role', 'admin');
+                window.location.href = 'admin.html';
+            } else {
+                localStorage.setItem('forlags_user', 'Cliente Nuevo');
+                localStorage.setItem('forlags_role', 'user');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

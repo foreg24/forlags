@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ForLags | Producto</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+     <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">ForLags</a>
+        <ul class="nav-links">
+            <li><a href="catalogo.html">
+
+                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-magnifying-glass" style="position:absolute; bottom:-5px; right:-5px; font-size:0.6em; background:white; border-radius:50%;"></i>
+                
+                <span>Catálogo</span>
+            </a></li>
+            <li><a href="sobre-nosotros.html"><i class="fa-solid fa-users"></i> <span>Sobre Nosotros</span></a></li>
+            <li><a href="contacto.html"><i class="fa-solid fa-envelope"></i> <span>Contacto</span></a></li>
+            <li><a href="faqs.html"><i class="fa-solid fa-circle-question"></i> <span>FAQs</span></a></li>
+            
+            <!-- Menú de Usuario -->
+            <li class="user-menu-container" onclick="toggleUserMenu()">
+                <div class="user-icon" id="userIconBtn">
+                    <i class="fa-solid fa-user"></i> <span id="userNameDisplay">Iniciar Sesión</span>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="login.html" id="linkLogin">Ingresar / Registro</a>
+                    <a href="perfil.html" id="linkPerfil" style="display:none;">Ver Perfil</a>
+                    <a href="admin.html" id="linkAdmin" style="display:none;">Gestionar</a>
+                    <a href="#" id="linkLogout" style="display:none;" onclick="cerrarSesion()">Cerrar Sesión</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- CARRITO -->
+    <div class="cart-bubble" onclick="toggleCart()">
+        <i class="fa-solid fa-cart-shopping" id="cartIcon"></i>
+    </div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>Tu Carrito</h2>
+            <i class="fa-solid fa-xmark" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-body">
+            <p>Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <h3>Total: $0</h3>
+            <a href="checkout.html" class="btn-salmon">Pagar ahora</a>
+        </div>
+    </div>
+
+    <main style="padding: 2rem 5%;">
+        <div style="display: flex; flex-wrap: wrap; gap: 40px; background: white; padding: 30px; border-radius: 15px;">
+            <div style="flex: 1; min-width: 300px;">
+                <img src="product.png" style="width: 100%; border-radius: 10px;">
+            </div>
+            <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+                <h1 style="color: var(--azul-oscuro); margin-bottom: 10px;">Producto 1</h1>
+                <h2 style="color: var(--salmon); margin-bottom: 20px;">$50.000</h2>
+                <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">Especificaciones detalladas del producto. Material de alta calidad, diseño exclusivo de ForLags.</p>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="font-weight: bold;">Cantidad:</label>
+                    <input type="number" value="1" min="1" style="width: 60px; padding: 5px; margin-left: 10px;">
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-azul" style="flex: 1;"><i class="fa-solid fa-cart-plus"></i> Agregar</button>
+                    <a href="checkout.html" class="btn-salmon" style="flex: 1;">Comprar Ahora</a>
+                </div>
+            </div>
+        </div>
+
+                <!-- ON FIRE -->
+        <section class="on-fire">
+            <h2 style="color: var(--azul-oscuro); margin-top: 3rem; text-align: center;">Productos Similares</h2>
+            <div class="carousel-wrapper">
+                <button class="scroll-btn left" onclick="scrollCarousel(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="carousel" id="carousel">
+                    <!-- Productos Genéricos -->
+                    <div class="product-card">
+                        <img src="imgs/product.png" alt="Producto">
+                        <h4 style="color: var(--azul-medio); margin: 10px 0;">Producto 1</h4>
+                        <p style="color: var(--salmon); font-weight: bold;">$50.000</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="imgs/product.png" alt="Producto">
+                        <h4 style="color: var(--azul-medio); margin: 10px 0;">Producto 2</h4>
+                        <p style="color: var(--salmon); font-weight: bold;">$50.000</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="imgs/product.png" alt="Producto">
+                        <h4 style="color: var(--azul-medio); margin: 10px 0;">Producto 3</h4>
+                        <p style="color: var(--salmon); font-weight: bold;">$50.000</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="imgs/product.png" alt="Producto">
+                        <h4 style="color: var(--azul-medio); margin: 10px 0;">Producto 4</h4>
+                        <p style="color: var(--salmon); font-weight: bold;">$50.000</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="imgs/product.png" alt="Producto">
+                        <h4 style="color: var(--azul-medio); margin: 10px 0;">Producto 5</h4>
+                        <p style="color: var(--salmon); font-weight: bold;">$50.000</p>
+                    </div>
+                </div>
+                <button class="scroll-btn right" onclick="scrollCarousel(1)"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <br><br>
+            <a href="catalogo.html" class="btn-azul">Ver todo el catálogo</a>
+        </section>
+    </main>
+
+        <!-- FOOTER -->
+    <footer>
+        <div class="footer-socials" style="margin-bottom: 1.5rem;">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-links" style="margin-bottom: 1.5rem;">
+            <a href="#">Política de Privacidad</a> | 
+            <a href="#">Política de Reembolso</a> | 
+            <a href="#">Política de Envío</a>
+        </div>
+        <p>&copy; 2026 ForLags. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- SCRIPTS GLOBALES -->
+    <script>
+        // Carrito
+        function toggleCart() { document.getElementById('cartDrawer').classList.toggle('active'); }
+        
+        // Carrusel
+        function scrollCarousel(direction) {
+            document.getElementById('carousel').scrollBy({ left: 300 * direction, behavior: 'smooth' });
+        }
+
+        // Menú Usuario
+        function toggleUserMenu() { document.getElementById('userDropdown').classList.toggle('active'); }
+
+        // Lógica de Sesión
+        const usuarioActual = localStorage.getItem('forlags_user');
+        const rolActual = localStorage.getItem('forlags_role');
+
+        if (usuarioActual) {
+            document.getElementById('userIconBtn').classList.add('logged-in');
+            // Mostrar solo el primer nombre
+            document.getElementById('userNameDisplay').innerText = usuarioActual.split(' ')[0];
+            document.getElementById('linkLogin').style.display = 'none';
+            document.getElementById('linkLogout').style.display = 'block';
+
+            if (rolActual === 'admin') {
+                document.getElementById('linkAdmin').style.display = 'block';
+            } else {
+                document.getElementById('linkPerfil').style.display = 'block';
+            }
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem('forlags_user');
+            localStorage.removeItem('forlags_role');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

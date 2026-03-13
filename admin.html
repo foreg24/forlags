@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ForLags | Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">ForLags <span style="font-size: 1rem; color: var(--salmon);">Admin</span></a>
+    </nav>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <h3>Mi Tienda</h3>
+            <button class="tab-btn active" onclick="abrirPestana('sec-productos', this)"><i class="fa-solid fa-box"></i> Productos</button>
+            <button class="tab-btn" onclick="abrirPestana('sec-ventas', this)"><i class="fa-solid fa-cart-shopping"></i> Ventas</button>
+            <button class="tab-btn" onclick="abrirPestana('sec-estadisticas', this)"><i class="fa-solid fa-chart-pie"></i> Estadísticas</button>
+            <button class="logout-btn" onclick="salirAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</button>
+        </aside>
+
+        <main class="admin-content">
+            <!-- PRODUCTOS -->
+            <section id="sec-productos" class="admin-section active">
+                <h2 style="color: var(--azul-oscuro); margin-bottom: 20px;">Gestión de Productos</h2>
+                <div style="background: var(--bg-hueso); padding: 20px; border-radius: 10px; margin-bottom: 20px;" class="admin-form">
+                    <h4>Añadir Nuevo Producto</h4><br>
+                    <input type="text" placeholder="Nombre del producto">
+                    <textarea placeholder="Especificaciones" rows="2"></textarea>
+                    <input type="number" placeholder="Stock disponible">
+                    <input type="number" placeholder="Precio Normal ($)">
+                    <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <input type="checkbox" style="width: auto; margin: 0;" id="checkPromo" onchange="togglePromo()"> ¿En promoción?
+                    </label>
+                    <input type="number" id="precioPromo" placeholder="Precio en Promoción ($)" style="display: none;">
+                    <input type="file" accept="image/*">
+                    <button class="btn-salmon">Guardar Producto</button>
+                </div>
+                <table class="admin-table">
+                    <tr><th>Producto</th><th>Stock</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr>
+                    <tr>
+                        <td>Producto 1</td><td>15</td><td>$50.000</td><td><span style="color: green;">Activo</span></td>
+                        <td>
+                            <button style="background: orange; color: white; border: none; padding: 5px; border-radius: 5px; cursor: pointer;">Ocultar</button>
+                            <button style="background: red; color: white; border: none; padding: 5px; border-radius: 5px; cursor: pointer;" onclick="confirmarEliminar()">Eliminar</button>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- VENTAS -->
+            <section id="sec-ventas" class="admin-section">
+                <h2 style="color: var(--azul-oscuro); margin-bottom: 20px;">Ventas y Pedidos</h2>
+                <div style="display: flex; gap: 20px;">
+                    <div style="flex: 1; background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid orange;">
+                        <h3>Por Confirmar (2)</h3><p>Pedidos nuevos esperando revisión.</p>
+                    </div>
+                    <div style="flex: 1; background: #d4edda; padding: 20px; border-radius: 10px; border-left: 5px solid green;">
+                        <h3>Confirmados (5)</h3><p>Listos para entregar a la transportadora.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ESTADÍSTICAS -->
+            <section id="sec-estadisticas" class="admin-section">
+                <h2 style="color: var(--azul-oscuro); margin-bottom: 20px;">Estadísticas</h2>
+                <select style="padding: 10px; margin-bottom: 20px; border-radius: 5px;">
+                    <option>Esta Semana</option><option>Este Mes</option><option>Este Año</option>
+                </select>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; background: var(--azul-claro); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3>Ventas Totales</h3><p style="font-size: 2rem; font-weight: bold;">$1'250.000</p>
+                    </div>
+                    <div style="flex: 1; background: var(--salmon); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                        <h3>Producto Estrella</h3><p style="font-size: 1.5rem; font-weight: bold;">Producto 1</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function abrirPestana(id, btn) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+        function togglePromo() {
+            document.getElementById('precioPromo').style.display = document.getElementById('checkPromo').checked ? 'block' : 'none';
+        }
+        function confirmarEliminar() {
+            if(confirm("¿Seguro de eliminar?")) alert("Eliminado");
+        }
+        function salirAdmin() {
+            localStorage.removeItem('forlags_user');
+            localStorage.removeItem('forlags_role');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
